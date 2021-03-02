@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'xrit'
+project = 'XR Interaction Toolkit Documentation 日本語版'
 copyright = '2021, Eisam'
 author = 'Eisam'
 
