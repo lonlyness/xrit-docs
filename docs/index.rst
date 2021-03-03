@@ -105,9 +105,17 @@ Installing the package
 Installing samples
 =======================
 
-The package comes with a number of samples. You can install these directly from the Package Manager (from Unity's main menu, go to **Window > Package Manager**). Select the XR Interaction Toolkit package, then click **Import** next to a sample to copy it into the current Project.
+このパッケージにはいくつかサンプルが含まれています。これらのサンプルは、パッケージマネージャから直接インストール可能です。（Unityのメインメニューから、**Window > Package Manager**）。XR Interaction Toolkit パッケージを選択し、サンプルの横にある**Import**をクリックして、現在のプロジェクトにインストールします。
 
-For more details about samples, see the `Samples <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/samples.html>`_ page.
+..
+  The package comes with a number of samples. You can install these directly from the Package Manager (from Unity's main menu, go to **Window > Package Manager**). Select the XR Interaction Toolkit package, then click **Import** next to a sample to copy it into the current Project.
+..
+
+サンプルの詳細については、`Samples <_https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/samples.html>`_ を参照してください。
+
+..
+  For more details about samples, see the `Samples <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/samples.html>`_ page.
+..
 
 Glossary
 =======================
@@ -119,33 +127,66 @@ Glossary
     * - Term
       - Meaning
     * - Controller
-      - A component that turns XR controller input such as a button press into interaction events like hover, or select. Also provides a way to show controller models and send haptic feedback to the controller.
+      - ボタンの押下などXRコントローラの入力を、ホバーや選択などのインタラクションイベントに変換するコンポーネント。また、コントローラモデルを表示したり、コントローラに触覚フィードバックを送信できます。
     * - Object
-      - Anything that the user sees or interacts with in the virtual world.
+      - 仮想世界でユーザーが見たり、対話したりするもの。
     * - Interactor
-      - An object in a Scene that can select or move another object in that Scene.
+      - シーン内の別のオブジェクトを選択したり、移動したりできるオブジェクト。
     * - Interactable
-      - An object in a Scene that the user can interact with (for example, grab it, press it, or throw it).
+      - ユーザーが操作可能なシーン内のオブジェクト（例: 掴む、押す、投げる）。
     * - Hover
-      - The state where an Interactor is in a valid state to interact with an object. This differs between Ray and Direct interaction.
+      - Interactor がオブジェクトとインタラクトできる状態。これは、Ray interaction や Direct interactionは異なる。
     * - Select
-      - The state where an Interactor is currently interacting with an object.
+      - Interactor がオブジェクトとインタラクトしている状態。
     * - Interaction Manager
-      - A manager component that handles interaction between a set of Interactors and Interactables.
+      - Interactor と Interactable のインタラクションを管理するマネージャーコンポーネント。
     * - Gesture
-      - Sequences of movements that translate into an action that manipulates an interactable.
+      - Interactableの操作に変換される一連の動作。
     * - Annotation
-      - A piece of content placed above (or next to) an AR object to give users information and context.
+      - ARオブジェクトの上（または隣）に配置され、ユーザーに情報やコンテキストを提供するコンテンツ。
     * - Haptic
-      - Sensory or visual stimuli that is sent to the user to give feedback for interaction.
-   
+      - フィードバックを与えるためにユーザーに送られる感覚的・視覚的刺激。
+
+..
+    .. list-table::
+        :widths: 15 10
+        :header-rows: 1
+
+        * - Term
+          - Meaning
+        * - Controller
+          - A component that turns XR controller input such as a button press into interaction events like hover, or select. Also provides a way to show controller models and send haptic feedback to the controller.
+        * - Object
+          - Anything that the user sees or interacts with in the virtual world.
+        * - Interactor
+          - An object in a Scene that can select or move another object in that Scene.
+        * - Interactable
+          - An object in a Scene that the user can interact with (for example, grab it, press it, or throw it).
+        * - Hover
+          - The state where an Interactor is in a valid state to interact with an object. This differs between Ray and Direct interaction.
+        * - Select
+          - The state where an Interactor is currently interacting with an object.
+        * - Interaction Manager
+          - A manager component that handles interaction between a set of Interactors and Interactables.
+        * - Gesture
+          - Sequences of movements that translate into an action that manipulates an interactable.
+        * - Annotation
+          - A piece of content placed above (or next to) an AR object to give users information and context.
+        * - Haptic
+          - Sensory or visual stimuli that is sent to the user to give feedback for interaction.
+..
+
 Setup
 =======
 
 Setup through GameObject menu
 ------------------------------
 
-To set up a Scene for use with the XR Interaction Toolkit, use the commands in the **GameObject** > XR menu to create Interaction GameObjects. You can drop Interactors, Interactables, and the XR Rig into the Scene from this menu.
+Sceneのセットアップでは、**GameObject** > XR メニューのコマンドを使用して、Interaction GameObjectを作成します。このメニューから、Interactors、Interactables、XR Rigをシーンに追加します。
+
+..
+  To set up a Scene for use with the XR Interaction Toolkit, use the commands in the **GameObject** > XR menu to create Interaction GameObjects. You can drop Interactors, Interactables, and the XR Rig into the Scene from this menu.
+..
 
 .. image:: ../img/gameobject-xr-menu.png
    :scale: 60%
@@ -153,19 +194,33 @@ To set up a Scene for use with the XR Interaction Toolkit, use the commands in t
 
 Interaction Manager
 ---------------------
-Every Scene that uses the XR Interaction Toolkit needs at least one Interaction Manager to facilitate interaction between Interactors and Interactables. By default, Interactors and Interactables reference the first Interaction Manager they find in the Scene if you don’t specify one. You can also break up larger Scenes with multiple Managers or turn specific ones on and off to enable sets of interaction.
 
+XR Interaction Toolkit を利用する全てのSceneは、Interactors とInteractables のインタラクションを管理するため、最低で1つの Interaction Manager が必要です。デフォルトは、指定しない場合、Interactors と Interactablesは シーン内で最初に発見した Interaction Managerを利用します。
+
+また、大きなシーンでは複数のInteraction Managerで分割したり、特定のManagerをオン/オフにして、一連のインタラクションを有効にすることもできます。
+
+..
+  Every Scene that uses the XR Interaction Toolkit needs at least one Interaction Manager to facilitate interaction between Interactors and Interactables. By default, Interactors and Interactables reference the first Interaction Manager they find in the Scene if you don’t specify one. You can also break up larger Scenes with multiple Managers or turn specific ones on and off to enable sets of interaction.
+..
 
 Controller/Interactor
 ----------------------
-An Interactor component controls how a GameObject interacts with other objects in the Scene. There are multiple types of Interactors. The example in the screenshot below uses a Ray Interactor, a component that uses `ray casting <https://docs.unity3d.com/ScriptReference/Physics.Raycast.html>`_ in order to find valid Interactable objects in the Scene.
+
+Interactorコンポーネントは、GameObjectが別のオブジェクトとどのようにインタラクトするのかを制御します。Interactorには複数のタイプがあります。以下のスクリーンショットの例では、シーン内のインタラクト可能なオブジェクトを見つけるために、`ray casting <https://docs.unity3d.com/ScriptReference/Physics.Raycast.html>`__ を使用するRay Interactorコンポーネントを使用しています。
+
+..
+  An Interactor component controls how a GameObject interacts with other objects in the Scene. There are multiple types of Interactors. The example in the screenshot below uses a Ray Interactor, a component that uses `ray casting <https://docs.unity3d.com/ScriptReference/Physics.Raycast.html>`_ in order to find valid Interactable objects in the Scene.
+..
 
 .. image:: ../img/interactor-setup.png
    :scale: 60%
    :align: left
 
+XR Input Deviceからの入力を受け取るには、Interactor GameObject は Controller objectを必要とします。これらのうちの1つを Interactor GameObject に追加し、以下のアクションの一部またはすべてを XR Input Device に追加します。
 
-To receive input from an XR input device, the Interactor GameObject needs a Controller object. Add one of these to your Interactor GameObject and bind some or all of the following actions to an XR input device:
+..
+  To receive input from an XR input device, the Interactor GameObject needs a Controller object. Add one of these to your Interactor GameObject and bind some or all of the following actions to an XR input device:
+..
 
 
 .. list-table::
@@ -175,37 +230,77 @@ To receive input from an XR input device, the Interactor GameObject needs a Cont
     * - Action
       - Required for
     * - Position, Rotation, and Select
-      - Basic interaction
+      - 基本的なインタラクション
     * - Activate
-      - Activating a selected object
+      - 選択したオブジェクトを有効化
     * - UI Press
-      - Interacting with UI objects
+      - UI Objectとのインタラクト
     * - Haptic Device
-      - Identifying the device to send haptic impulses to
+      - 触覚的刺激を送信するためデバイスを特定する
     * - Rotate and Translate Anchor
-      - Manipulating a selected object at a distance
+      - 遠距離から選択したオブジェクトを操作する
 
 
-The Controller and Interactor have limited support for haptic feedback. To enable haptic feedback for an XR Controller (Action-based), specify a **Haptic Device Action** with a binding path to an active control, such as ``<XRController>{LeftHand}/*`` . To enable haptic feedback for an XR Controller (Device-based), specify a Controller Node that supports haptic feedback, such as **Left Hand** . The Interactor can then specify intensities and durations of haptic feedback to play back on select and hover.
+..
+  .. list-table::
+      :widths: 15 10
+      :header-rows: 1
 
-The **Enable Interaction with UI GameObjects** option controls whether this XR Ray Interactor can interact with Unity UI elements in the scene.
+      * - Action
+        - Required for
+      * - Position, Rotation, and Select
+        - Basic interaction
+      * - Activate
+        - Activating a selected object
+      * - UI Press
+        - Interacting with UI objects
+      * - Haptic Device
+        - Identifying the device to send haptic impulses to
+      * - Rotate and Translate Anchor
+        - Manipulating a selected object at a distance
+..
+
+Controller と Interactor は触覚フィードバックのサポートが限定されています。
+R Controller (Action-based) で触覚フィードバックを有効にするには、**Haptic Device Action** にアクティブなコントロールへのバインディングパスを指定します。(例: ``<XRController>{LeftHand}/*``) XR Controller (Device-based)で触覚フィードバックを有効にするには、コントローラノードを指定します。Interactorは、選択時やホバー時に再生する強さと持続時間を指定できます。
+
+**Enable Interaction with UI GameObjects** オプションは、このXR Ray InteractorがUnity UI Elements とインタラクトできるかどうかを管理します。
+
+..
+  The Controller and Interactor have limited support for haptic feedback. To enable haptic feedback for an XR Controller (Action-based), specify a **Haptic Device Action** with a binding path to an active control, such as ``<XRController>{LeftHand}/*`` . To enable haptic feedback for an XR Controller (Device-based), specify a Controller Node that supports haptic feedback, such as **Left Hand** . The Interactor can then specify intensities and durations of haptic feedback to play back on select and hover.
+
+  The **Enable Interaction with UI GameObjects** option controls whether this XR Ray Interactor can interact with Unity UI elements in the scene.
+..
 
 
 Interactable
 -------------
-Interactable components define how the user can interact with objects in a Scene. In the screenshot below, the interactable GameObject supports grabbing, moving, dropping, and throwing.
+Interactable コンポーネントは、ユーザーがシーン内のオブジェクトとどのようにインタラクトできるかを決定します。次のスクリーンショットでは、Interactable GameObjectは、掴む、移動する、落とす、投げるが可能です。
 
+..
+  Interactable components define how the user can interact with objects in a Scene. In the screenshot below, the interactable GameObject supports grabbing, moving, dropping, and throwing.
+..
 
 .. image:: ../img/interactable-setup.png
    :scale: 60%
    :align: left
 
-Interactables added through the **GameObject > XR** menu use a Sphere Collider to detect interaction, but other types of Collider components can provide better hit detection.
+**GameObject > XR** メニューで追加されたInteractablesは、Sphere Colliderを利用しインタラクションを検出しますが、他のColliderコンポーネントを利用すると、より良い衝突検出が可能になります。
 
-As an example, to set up an Interactable object that the user can grab, select it in your Scene and add these components:
+例として、ユーザーが掴めるInteractable オブジェクトをセットアップするには、以下のコンポーネントを追加します。
 
     * XR Grab Interactable
     * A convex Mesh Collider
+
+..
+  Interactables added through the **GameObject > XR** menu use a Sphere Collider to detect interaction, but other types of Collider components can provide better hit detection.
+
+  As an example, to set up an Interactable object that the user can grab, select it in your Scene and add these components:
+
+    * XR Grab Interactable
+    * A convex Mesh Collider
+..
+
+
 
 Action-based vs. Device-based behaviors
 ----------------------------------------
