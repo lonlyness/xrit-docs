@@ -305,20 +305,39 @@ Interactable コンポーネントは、ユーザーがシーン内のオブジ�
 Action-based vs. Device-based behaviors
 ----------------------------------------
 
-Several behaviors, such as the `Snap Turn Provider <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/locomotion.html#snap-turn-provider>`_ , have two variants: an Action-based behavior and a Device-based behavior. Action-based behaviors use `Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html>`_ to indirectly read input from one or more controls. Device-based behaviors use `InputDevice.TryGetFeatureValue` to read input directly from an `InputDevice` from a specific control configured on the behavior itself.
+`Snap Turn Provider <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/locomotion.html#snap-turn-provider>`_ などのBehaiorsには、Action-based behaviorとDevice-based behaviorの2種類あります。
+Action-based behaviorは、 `Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html>`_ を使用して1つ以上のコントローラーから間接的に入力を読み取ります。Device-based behaviorは、``InputDevice.TryGetFeatureValue`` を使用し、Behavior自体に設定された ``InputDevice`` から入力を直接読み取ります。
 
-It is recommended that you use the Action-based variant instead of the Device-based variant to take advantage of the benefits that the Input System package provides. Some features, such as the XR Device Simulator, are only supported when using Actions.
+Input Systemパッケージの利点を有効活用するには、Device-basedではなく、Action-basedを使用することをお勧めします。XR Device Simulatorのようないくつかの機能は、アクションを使用した場合にのみサポートされます。
+
+..
+  Several behaviors, such as the `Snap Turn Provider <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/locomotion.html#snap-turn-provider>`_ , have two variants: an Action-based behavior and a Device-based behavior. Action-based behaviors use  `Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html>`_ to indirectly read input from one or more controls. Device-based behaviors use `InputDevice.TryGetFeatureValue` to read input directly from an `InputDevice` from a specific control configured on the behavior itself.
+
+  It is recommended that you use the Action-based variant instead of the Device-based variant to take advantage of the benefits that the Input System package provides. Some features, such as the XR Device Simulator, are only supported when using Actions.
+..
 
 Using Actions with Action-based behaviors
 ------------------------------------------
 
-Actions must be enabled before they react to input. See `Using Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html#using-actions>`_ in the Input System documentation for details about this process. Action-based behaviors in this package have properties of type `InputActionProperty` which can either store an Action directly, or indirectly by referencing an Action contained in an Input Action Asset. Action-based behaviors automatically enable and disable the Actions that are directly defined (that is, not a reference) during their on `OnEnable` and `OnDisable` events. Action-based behaviors don't automatically enable or disable the Actions that are indirectly defined (that is, a reference) to allow the enabled state to be managed externally.
+Actions は入力に反応する前に有効になっている必要があります。
+このプロセスの詳細は、Input System ドキュメントの `Using Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html#using-actions>`_ を参照してください。
+ 
+本パッケージのAction-based behaviorsは ``InputActionProperty`` 型のプロパティを持ち、これはActionを直接保存するか、Input Action Assetに含まれるActionを参照することで間接的に保存します。Action-based behaviorsは、OnEnableイベントやOnDisableイベントに直接定義された(参照ではなく)Actionを自動的に有効/無効にします。Action-based behaviorsは、間接的に定義された(参照)Actionを自動的に有効/無効にして、有効な状態を外部で管理できるようにしません。
 
-The Input Action Manager behavior can be used to automatically enable or disable the Actions defined in an Input Action Asset during its own `OnEnable` and `OnDisable` events. As an example, you can add this behavior to a GameObject in your Scene and add all Input Action Assets that you make use of to the **Action Assets** list.
+Input Action Manager Behaviorを使用して、Input Action Assetで定義されたActionsを、自身のOnEnableイベントとOnDisableイベントの中で自動的に有効/無効にすることができます。
+
+例として、このBehaviorをGameObjectに追加し、使用している全ての Input Action Assetsを Action Assetsリストに追加できます。
+
+..
+  Actions must be enabled before they react to input. See `Using Actions <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html#using-actions>`_ in the Input System documentation for details about this process. Action-based behaviors in this package have properties of type `InputActionProperty` which can either store an Action directly, or indirectly by referencing an Action contained in an Input Action Asset. Action-based behaviors automatically enable and disable the Actions that are directly defined (that is, not a reference) during their on `OnEnable` and `OnDisable` events. Action-based behaviors don't automatically enable or disable the Actions that are indirectly defined (that is, a reference) to allow the enabled state to be managed externally.
+
+  The Input Action Manager behavior can be used to automatically enable or disable the Actions defined in an Input Action Asset during its own `OnEnable` and `OnDisable` events. As an example, you can add this behavior to a GameObject in your Scene and add all Input Action Assets that you make use of to the **Action Assets** list.
+..
 
 .. image:: ../img/input-action-manager.png
-   :scale: 60%
+   :scale: 65%
    :align: left
+
 
 Note: For Input Actions to read from input devices correctly while running in the Unity Editor, the Game view must have focus. If you find that your input, such as button presses on the controllers, are not working, ensure the Game view has focus by clicking it with your mouse. A **Lock Input to Game View** option is available in the `Input Debugger <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Debugging.html#input-debugger>`_ window (**Window > Analysis > Input Debugger**). Enabling this option forces input to continue processing even when the Game view does not have focus.
 
