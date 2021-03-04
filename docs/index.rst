@@ -338,17 +338,24 @@ Input Action Manager Behaviorを使用して、Input Action Assetで定義され
    :scale: 65%
    :align: left
 
+注意事項: Unity Editorで実行中に入力デバイスから正しく入力を受け取るにはGameViewにフォーカスが当たっている必要があります。コントローラーの操作でうまくいかない場合には、マウスでクリックしてフォーカスを当ててください。Input Debuggerウィンドウ(Window > Analysis > Input Debugger)では、入力をGame Viewにロックする設定が利用可能です。この設定を有効にした場合、フォーカスがGame Viewに当たっていない場合でも、入力の処理が継続されます。
 
-Note: For Input Actions to read from input devices correctly while running in the Unity Editor, the Game view must have focus. If you find that your input, such as button presses on the controllers, are not working, ensure the Game view has focus by clicking it with your mouse. A **Lock Input to Game View** option is available in the `Input Debugger <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Debugging.html#input-debugger>`_ window (**Window > Analysis > Input Debugger**). Enabling this option forces input to continue processing even when the Game view does not have focus.
+Actionsを利用するBehabiorsの設定を効率化するために、Defalut Input Actions Sampleがパッケージに含まれています。
 
-To streamline setup of behaviors that use Actions, a `Default Input Actions Sample <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/samples.html#default-input-actions>`_ is included with the package.
+..
+  Note: For Input Actions to read from input devices correctly while running in the Unity Editor, the Game view must have focus. If you find that your input, such as button presses on the controllers, are not working, ensure the Game view has focus by clicking it with your mouse. A **Lock Input to Game View** option is available in the `Input Debugger <https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Debugging.html#input-debugger>`_ window (**Window > Analysis > Input Debugger**). Enabling this option forces input to continue processing even when the Game view does not have focus.
 
+  To streamline setup of behaviors that use Actions, a `Default Input Actions Sample <https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@1.0/manual/samples.html#default-input-actions>`_ is included with the package.
+..
 
 Debugger window
 ==================
 
-The XR Interaction Toolkit Debugger window displays a top-down view of all the Input Devices, Interactables, and Interactors in a Scene. It also displays their relationship to each other and their parent Interaction Managers. To open this window, go to **Window > Analysis > XR Interaction Debugger** from Unity's main menu.
+XR Interaction Toolkit Debugger ウィンドウには、シーン内のすべての入力デバイス、Interactables, Interactorsが表示されます。またそれらの親 Interaction Managerや関係も表示されます。このウィンドウはメインメニューのWindow > Analysis > XR Interaction Debuggerから開けます。
 
+..
+  The XR Interaction Toolkit Debugger window displays a top-down view of all the Input Devices, Interactables, and Interactors in a Scene. It also displays their relationship to each other and their parent Interaction Managers. To open this window, go to **Window > Analysis > XR Interaction Debugger** from Unity's main menu.
+..
 .. image:: ../img/interaction-debugger.png
    :scale: 60%
    :align: left
@@ -356,17 +363,32 @@ The XR Interaction Toolkit Debugger window displays a top-down view of all the I
 
 InteractionLayerMask
 ======================
+InteractionLayerMaskはどのInteractorsがInteractablesに作用できるかをフィルタリングします。InteractionLayerMaskを少なくとも1つ共有していない場合は、インタラクト可能ですが、そうでない場合は、できません。Maskを比較する際は、GameObjectのレイヤーは考慮されません。InteractionLayerMaskのみが対象です。
 
-The InteractionLayerMask is a mechanism for filtering which interactors can act upon which interactables. Interactors and interactables that share at least one layer in their InteractionLayerMask are allowed to interact. If an interactor and interactable do not share at least one layer in their InteractionLayerMask then they are not allowed to interact. Mask comparisons do not consider the layer on an interactor's or interactable's GameObject. Comparisons only consider the InteractionLayerMasks on the interactor and interactable.
+..
+  The InteractionLayerMask is a mechanism for filtering which interactors can act upon which interactables. Interactors and interactables that share at least one layer in their InteractionLayerMask are allowed to interact. If an interactor and interactable do not share at least one layer in their InteractionLayerMask then they are not allowed to interact. Mask comparisons do not consider the layer on an interactor's or interactable's GameObject. Comparisons only consider the InteractionLayerMasks on the interactor and interactable.
+..
 
-InteractionLayerMasks use physics layers, but this mask is distinct from a raycast mask. A raycast mask specifies what a raycast can hit. The InteractionLayerMask specifies whether an interactor and interactable can interact through state changes such as select and hover.
 
-InteractionLayerMasks can be set on both interactors and interactables, and default to interact with all layers.
+InteractionLayerMasksは物理レイヤーを使用しているが、raycast maskとは異なります。raycast maskでは、raycast可能な物を特定します。それに対し、InteractionLayerMasksではselectやhoverなどの状態の変化を通してインタラクト可能かどうかを特定します。
+
+..
+  InteractionLayerMasks use physics layers, but this mask is distinct from a raycast mask. A raycast mask specifies what a raycast can hit. The InteractionLayerMask specifies whether an interactor and interactable can interact through state changes such as select and hover.
+..
+
+InteractionLayerMasksは、interactors と interactablesの両方に設定することが可能であり、デフォルトでは全てのレイヤーとインタラクトするようになっています。
+
+..
+  InteractionLayerMasks can be set on both interactors and interactables, and default to interact with all layers.
+..
 
 UI interaction setup
 ======================
+UnityのUI Elementsとインタラクトするには、特に3D-tracked オブジェクトを扱う場合は、いくつかの手順を踏まなければいけません。XR Interaction Toolkitには、UIとシームレスに動作するようXR Controllerを変換する新しいコンポーネントが多数用意されており、基本的な設定が可能なメニューオプションヘルパーも用意されています。
 
-To interact with Unity's built-in UI elements, you need to perform extra steps, particularly if you’re dealing with 3D-tracked devices. The XR Interaction Toolkit package provides a number of new components that you can use to convert an XR controller to work seamlessly with the UI, as well as helper menu options that handle basic configuration settings.
+..
+  To interact with Unity's built-in UI elements, you need to perform extra steps, particularly if you’re dealing with 3D-tracked devices. The XR Interaction Toolkit package provides a number of new components that you can use to convert an XR controller to work seamlessly with the UI, as well as helper menu options that handle basic configuration settings.
+..
 
 Using the GameObject menu
 ---------------------------
